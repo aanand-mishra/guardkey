@@ -128,3 +128,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# REDIS CONNECTION SETTINGS
+import os
+REDIS_HOST = os.environ.get('REDIS_HOST', '127.0.0.1')
+REDIS_PORT = int(os.environ.get('REDIS_PORT', 6379))
+REDIS_DB_AUTH = 0
+REDIS_DB_THROTTLE = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': [],
+    'DEFAULT_THROTTLE_RATES': {
+        'auth_endpoints': '5/minute',
+    }
+}
